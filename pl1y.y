@@ -48,11 +48,6 @@ another_parameters	: types IDNTFR
 
 
 %%
-#include "lex.yy.c" 
 int main(){
-	int token;
-	while(token = yylex()){
-		printf("%d\n", token);
-	}
 	yyparse();     
 }

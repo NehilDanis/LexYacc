@@ -36,6 +36,3 @@ DIRECTORY	{UPPER_CASE_LETTER}{COLON}(\\{CHARACTER}+)*
 .		printf("Error!");
 
 %%
-int yywrap(){
-	return 1;
-}

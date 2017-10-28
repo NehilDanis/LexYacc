@@ -1,26 +1,42 @@
-LEFT_SQ_BRACKET	[
-RIGHT_SQ_BRACKET	]
-COLON	:
-UPPER_CASE_LETTER	[A-Z] 
-CHARACTER	[A-Za-z]
+UPPER_CASE_LETTER	[A-Z]
+LOWER_CASE_LETTER	[a-z] 
+CHARACTER	{UPPER_CASE_LETTER}|{LOWER_CASE_LETTER}
+
+DIGIT [0-9]
+SIGN	[\-+]
+INTEGER	{SIGN}?{DIGIT}+
+FLOAT	{SIGN}?{DIGIT}*"."{DIGIT}+
+NUMBER	{INTEGER}|{FLOAT}
+
 TEXT_FILE \.(txt)
 MUSIC_FILE \.(mp[3-4])
 PHOTO_FILE \.((jpg)|(jpeg)|(png))
-DIGIT [0-9]
 DIRECTORY	{UPPER_CASE_LETTER}{COLON}(\\{CHARACTER}+)*
+
+%{
+#include <stdio.h>
+#include <string.h>
+%}
  	
 %%
-{DIRECTORY}	printf("DIRECTORY\n");
-{DIRECTORY}(\\{CHARACTER}+{DIGIT}*{TEXT_FILE}) 	printf("TEXT_FILE\n");
-{DIRECTORY}(\\{CHARACTER}+{DIGIT}*{MUSIC_FILE})	printf("MUSIC_FILE\n");
-{DIRECTORY}(\\{CHARACTER}+{DIGIT}*{PHOTO_FILE})	printf("PHOTO_FILE\n");
+"{"	{return(atoi("LEFT_BRACKET"));}
+"}"	{return(atoi("RIGHT_BRACKET"));}
+"("	{return(atoi("LEFT_PARENTHESIS"));}
+")"	{return(atoi("RIGHT_PARENTHESIS"));}
 
 
+"void"	{return(atoi("VOID"));}
+
+"func"	{return(atoi("FUNC"));}
+{UPPER_CASE_LETTER}?{LOWER_CASE_LETTER}+  {return(atoi("IDNTFR"));}
 
 
-"createFile"	printf("BLTIN_CREATE_FILE");
-"func"	printf("FUNCTION");
+(\r|\n|\r\n)	;
+[ \t\v\f]+	;
+.		printf("Error!");
 
-(\r|\n|\r\n)	printf("NEW_LINE\n");
-[ \t\v\f]+	printf("WHITE_SPACE\n");
 %%
+
+int yywrap(){
+	return 1;
+}

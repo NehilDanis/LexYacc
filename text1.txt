@@ -1,4 +1,3 @@
-C:\nehil\deneme\a.txt
-D:\nehil
-C:\NEHIL\ND123.jpg
-E:\baso\ned\qwer.mp4
+void deneme (void)
+{
+}

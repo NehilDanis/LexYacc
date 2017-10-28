@@ -12,23 +12,23 @@ TEXT_FILE \.(txt)
 MUSIC_FILE \.(mp[3-4])
 PHOTO_FILE \.((jpg)|(jpeg)|(png))
 DIRECTORY	{UPPER_CASE_LETTER}{COLON}(\\{CHARACTER}+)*
-
 %{
 #include <stdio.h>
 #include <string.h>
+#include "y.tab.h"
 %}
  	
 %%
-"{"	{return(atoi("LEFT_BRACKET"));}
-"}"	{return(atoi("RIGHT_BRACKET"));}
-"("	{return(atoi("LEFT_PARENTHESIS"));}
-")"	{return(atoi("RIGHT_PARENTHESIS"));}
+"{"	{return (LEFT_BRACKET);}
+"}"	{return (RIGHT_BRACKET);}
+"("	{return (LEFT_PARENTHESIS);}
+")"	{return (RIGHT_PARENTHESIS);}
 
 
-"void"	{return(atoi("VOID"));}
+"void"	{return (VOID);}
 
-"func"	{return(atoi("FUNC"));}
-{UPPER_CASE_LETTER}?{LOWER_CASE_LETTER}+  {return(atoi("IDNTFR"));}
+"func"	{return (FUNC);}
+{UPPER_CASE_LETTER}?{LOWER_CASE_LETTER}+  {return (IDNTFR);}
 
 
 (\r|\n|\r\n)	;
@@ -36,7 +36,6 @@ DIRECTORY	{UPPER_CASE_LETTER}{COLON}(\\{CHARACTER}+)*
 .		printf("Error!");
 
 %%
-
 int yywrap(){
 	return 1;
 }

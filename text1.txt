@@ -1,5 +1,0 @@
-func int deneme ( void )
-{
-	_copyFile_("C:\nehil\ozlem\zalim.txt");
-	return ;
-}

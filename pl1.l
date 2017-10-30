@@ -16,6 +16,7 @@ DIRECTORY	{UPPER_CASE_LETTER}{COLON}(\\{CHARACTER}+)*
 #include <stdio.h>
 #include <string.h>
 #include "y.tab.h"
+int line_count=0;
 %}
  	
 %%
@@ -23,16 +24,27 @@ DIRECTORY	{UPPER_CASE_LETTER}{COLON}(\\{CHARACTER}+)*
 "}"	{return (RIGHT_BRACKET);}
 "("	{return (LEFT_PARENTHESIS);}
 ")"	{return (RIGHT_PARENTHESIS);}
-
+"\""    {return (QUOTO);}
+";"	{return (SEMI_COLON);}
+"_copyFile_"	{return (BLTN_COPYFILE);}
 
 "void"	{return (VOID);}
+"int"	{return (INT);}
+"float"	{return (FLOAT);}
+return		{return (RETURN);}
 
 "func"	{return (FUNC);}
-{UPPER_CASE_LETTER}?{LOWER_CASE_LETTER}+  {return (IDNTFR);}
+{CHARACTER}+(\-)?{CHARACTER}*  {return (IDNTFR);}
+{UPPER_CASE_LETTER}\:(\\{CHARACTER}+)*(\\{CHARACTER}+{TEXT_FILE})	{return (TEXT_FILE);}
+{UPPER_CASE_LETTER}\:(\\{CHARACTER}+)*(\\{CHARACTER}+{MUSIC_FILE})      {return (MUSIC_FILE);}
+{UPPER_CASE_LETTER}\:(\\{CHARACTER}+)*(\\{CHARACTER}+{PHOTO_FILE})      {return (PHOTO_FILE);}
+{UPPER_CASE_LETTER}\:(\\{CHARACTER}+)* {return (DIRECTORY);}
 
-
-(\r|\n|\r\n)	;
-[ \t\v\f]+	;
-.		printf("Error!");
+(\r|\n|\r\n)	{line_count++;}
+[ \t\v\f]	{ }
+.		printf("%s",yytext);
 
 %%
+int yywrap(){
+	return 1;
+} 

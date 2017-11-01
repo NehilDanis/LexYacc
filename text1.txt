@@ -1,5 +1,10 @@
-func void deneme(void)
+func deneme(void)
 {
-	_copyFile_("C:\nehil\deneme\nd.txt");
-	return;
+	if(true){
+		deneme(x);
+	}
+	else {
+		_copyFile_("C:\nehil\deneme\nd.txt");
+	}
+	return 0;
 }

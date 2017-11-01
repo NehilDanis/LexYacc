@@ -41,7 +41,7 @@ block	: LEFT_BRACKET empty RIGHT_BRACKET
        	| LEFT_BRACKET statement_list ret_stmt RIGHT_BRACKET
         ;
 
-block_loop	: LEFT_BRACKET statement_list IDNTFR assignment out_of_scope_stmt RIGHT_BRACKET
+block_loop	: LEFT_BRACKET statement_list out_of_scope_stmt RIGHT_BRACKET
        		;
 
 ret_stmt	: RETURN factor SEMI_COLON
@@ -90,6 +90,7 @@ statement	: built_in_func SEMI_COLON
 		| declaration SEMI_COLON
 		| loop
 		;
+
 initialize	: declaration
 		| assignment
 		;
@@ -141,7 +142,7 @@ term 	: ltrl_type
 	| term DIVIDE_OPT ltrl_type
 	;
 
-func_call	: IDNTFR LEFT_PARENTHESIS parameter_list RIGHT_PARENTHESIS
+func_call	: IDNTFR LEFT_PARENTHESIS send_parameter_list RIGHT_PARENTHESIS
 		;
 
 
@@ -218,6 +219,10 @@ parameter_list	: VOID
 
 another_parameters	: data_type IDNTFR
 			| another_parameters COMMA data_type IDNTFR
+			;
+
+send_parameter_list	: boolean_expr
+			| send_parameter_list COMMA boolean_expr
 			;
 
 

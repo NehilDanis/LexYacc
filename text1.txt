@@ -1,4 +1,4 @@
-func deneme(void)
+func deneme(int a, float b, bool c)
 {
 	if(true){
 		deneme(x);

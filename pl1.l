@@ -61,6 +61,21 @@ int line_count=0;
 "range"	{return (RANGE);}
 
 "_copyFile_"	{return (BLTN_COPYFILE);}
+"_playMusic_"	{return (BLTN_PLAYMUSIC);}
+"_viewPhoto_"	{return (BLTN_VIEWPHOTO);}
+"_editFile_"	{return (BLTN_EDITFILE);}
+"_openFile_"	{return (BLTN_OPENFILE);}
+"_closeFile_"	{return (BLTN_CLOSEFILE);}
+"_openDir_"	{return (BLTN_OPENDIR);}
+"_getPath_"	{return (BLTN_GETPATH);}
+"_listDirContent_"	{return (BLTN_LISTDIRCONTENT);}
+"_move_"	{return (BLTN_MOVE);}
+"_delete_"	{return (BLTN_DELETE);}
+"_create_"	{return (BLTN_CREATE);}
+"_connectToServer_"	{return (BLTN_CONNECTTOSERVER);}
+"_compareFiles_"	{return (BLTN_COMPAREFILES);}
+"_changePath_"	{return (BLTN_CHANGEPATH);}
+"_isDir_"	{return (BLTN_ISDIR);}
 
 "void"	{return (VOID);}
 "int"	{return (INT);}

@@ -1,10 +1,55 @@
-func deneme(int a, float b, bool c)
+func main(int a, float b, bool c)
 {
-	if(true){
-		deneme(x);
-	}
-	else {
-		_copyFile_("C:\nehil\deneme\nd.txt");
+	dir curr_path = _getPath_();
+	ctrl_content(curr_path);
+	_openDir_("D:\home\newCreated");
+	_create_("C:\nd\newFile.txt");
+	dir path = "C:\nd";
+	linkedList list = _listDirContent_(path);
+	int len = _length_(list);
+	w_loop (len > 0){
+		if (_isDir_(list[len])==false){
+			_move_(list[len], "D:\home\newCreated");
+			len--;
+		}
 	}
 	return 0;
+}
+
+func ctrl_content(dir new_path)
+{	
+	_changeDirectory_(new_path);
+	dir path;
+	linkedList list = _listDirContent_();
+	f_loop i in list{
+                if(_isDir_(i)){
+                        path = _getPath_(i);
+			ctrl_content(i);
+                }
+
+                else{
+                        if(_controlUpToDate_(i) == false)
+			{     
+				changed_file_upload(i);
+			}
+			else if(_controlUpToDate_(i)==true){
+				_editFile_(i);
+				changed_file_upload(i);
+			}
+                }
+        }
+	return;
+}
+
+func changed_file_upload(file f)
+{
+	_connectToServer_();
+	if(_uploadToCloud_(f)){
+		_print_("File_is_Successfully_uploaded_to_cloud");
+	}
+	else{
+		_print_("Your_file_could_not_be_uploaded_to_the_server");
+	}
+	_closeServerConn_();
+
 }
